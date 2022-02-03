@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="længde" placeholder="Angiv Længde" />
+    <input type="text" id="bredde" placeholder="Angiv Bredde" />
+    <input type="submit" value="Submit" id="knap" />
+    <script>
+        let tal1 = document.querySelector("#længde").value;
+        let tal2 = document.querySelector("#bredde").value;
+        let knap = document.querySelector("#knap");
+        window.addEventListener("load", () => {
+        
+        knap.addEventListener("click", () => {
+            let tal1 = document.querySelector("#længde").value;
+            let tal2 = document.querySelector("#bredde").value;
+            areal(tal1, tal2)
+        });
+         });
+
+        function areal(længde, bredde) {
+        let areal = længde * bredde;
+        console.log(areal)
+      };
+    </script>
+  </body>
+</html>
+
+

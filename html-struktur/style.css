@@ -1,0 +1,47 @@
+body{
+     margin: 0%;
+    padding: 0%;
+}
+main{
+        margin-inline: 5%;
+}
+
+img{
+    width: 100%;
+   
+}
+
+header{
+    text-align: center;
+    border: solid 1px black;
+}
+
+figure{
+    width: 100%;
+    display: grid;
+    margin: 0%;
+
+}
+figcaption{
+    font-size: 1.5rem;
+}
+
+section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    padding-bottom: 2%;
+
+}
+
+article{
+    border: solid black 1px;
+    display: grid;
+    justify-items: center;
+
+}
+
+footer{
+    border: black solid 1px;
+    text-align: center;
+}

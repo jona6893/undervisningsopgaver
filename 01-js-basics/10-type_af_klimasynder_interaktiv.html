@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="timer" placeholder="Angiv antal timer" />
+    <input type="submit" value="Submit" id="knap" />
+    <script>
+        window.addEventListener("load", () => {
+
+          const knap = document.querySelector("#knap")
+          
+          
+          knap.addEventListener("click", () => {
+            let timer = document.querySelector("#timer").value
+            let co2UdledtIKgVedFlyrejse = timer * 109;
+          if (isNaN(timer)) {
+            console.log("Indtast venligst et tal")
+          } else {
+            if (co2UdledtIKgVedFlyrejse < 100) {
+              console.log("Ved " + timer + " timers flyrejse har du udledt " + co2UdledtIKgVedFlyrejse + "kg CO2. Tæt på ThunbergTæt på Thunberg")
+            } else if (co2UdledtIKgVedFlyrejse >= 100 && co2UdledtIKgVedFlyrejse < 200) {
+              console.log("Ved " + timer + " timers flyrejse har du udledt " + co2UdledtIKgVedFlyrejse + "kg CO2. Ja ja, du behøver ikke at melde dig ud af Å!" )
+            } else if (co2UdledtIKgVedFlyrejse >= 200 && co2UdledtIKgVedFlyrejse < 600) {
+              console.log("Ved " + timer + " timers flyrejse har du udledt " + co2UdledtIKgVedFlyrejse + "kg CO2. Det er godt for turismen i nordeuropa." )
+            } else {
+                console.log("Ved " + timer + " timers flyrejse har du udledt " + co2UdledtIKgVedFlyrejse + "kg CO2. Nå ja vi kan jo altid kolonisere en anden planet ..." )
+            }
+          }
+          });
+          
+          
+
+
+
+      });
+    </script>
+  </body>
+</html>
+
+

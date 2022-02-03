@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-visMedTemplate</title>
+</head>
+<body>
+    <section class="data-container"></section>
+    <template>
+    <article id="dyrlist">
+        <h3></h3>
+        <img src="" alt="">
+        <p class="type">Type:</p>
+        <p class="levested">levested:</p>
+        <ul id="femDyrListe"> 
+            
+        </ul>
+    </article>
+    </template>
+    <style>
+        article{
+            border: 1px solid darkgrey;
+            padding: 5%;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () =>{
+
+            console.log("DOM Loaded")
+
+    
+            let dyr = {"navn" : "gris", "type" : "pattedyr", "billede" : "http://mabe-kea.dk/E19/pics/pig.png", "levested" : "svinefarme"}
+            console.log(`navn:${dyr.navn}, type:${dyr.type}, billede:${dyr.billede}, levested:${dyr.levested}`)
+/* 
+            const p1 = document.querySelector("p:nth-of-type(1)")
+            const p2 = document.querySelector("p:nth-of-type(2)")
+            const article = document.querySelector("#dyrlist")
+        
+
+            article.querySelector("h3").textContent = dyr.navn;
+            article.querySelector("img").src = dyr.billede;
+            article.querySelector("p").textContent = dyr.levested;
+            p1.textContent = `Type: ${dyr.type}`
+            p2.textContent = `Type: ${dyr.levested}`
+ */
+
+            femDyrFunktion()
+            
+            
+        })
+
+        function femDyrFunktion(){
+            let femDyr = [
+                {"navn" : "frø", "type" : "amfibie", "levested" : "sø", "billede" : "http://mabe-kea.dk/E19/pics/frog.png"},
+                {"navn" : "gris", "type" : "pattedyr", "levested" : "svinefarme", "billede" : "http://mabe-kea.dk/E19/pics/pig.png"},
+                {"navn" : "ræv", "type" : "pattedyr", "levested" : "byen", "billede" : "http://mabe-kea.dk/E19/pics/fox.png"},
+                {"navn" : "sild", "type" : "fisk", "levested" : "havet", "billede" : "http://mabe-kea.dk/E19/pics/sild.png"},
+                {"navn" : "krokodille", "type" : "krybdyr", "levested" : "lavland", "billede" : "http://mabe-kea.dk/E19/pics/kroko.jpg"}
+            ]
+            console.log(femDyr[0], femDyr[1], femDyr[2], femDyr[3], femDyr[4])
+
+            /* const listevisning = document.querySelector("#femDyrListe")
+            femDyr.forEach(dyr => {
+                listevisning.innerHTML += `<li>${dyr.navn}, ${dyr.type} fra ${dyr.levested}</li>`
+            }) */
+
+            const container = document.querySelector(".data-container")
+            const underviserTemplate = document.querySelector("template")
+            femDyr.forEach(dyr => {
+                let klon = underviserTemplate.cloneNode(true).content
+                klon.querySelector("h3").textContent = dyr.navn
+                klon.querySelector(".type").textContent = dyr.type
+                klon.querySelector(".levested").textContent = dyr.levested
+                klon.querySelector("img").src = dyr.billede;
+                container.appendChild(klon)
+            })
+                console.log("made it so far")
+        }
+
+    </script>
+</body>
+</html>

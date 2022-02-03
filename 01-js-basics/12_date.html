@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="partner1" placeholder="partner 1 alder" />
+    <input type="text" id="partner2" placeholder="partner 2 alder" />
+    <input type="submit" value="Tjek" id="knap" />
+    
+    <script>
+       
+          // variabler //
+          window.addEventListener("load", sidenVises());
+          
+          function sidenVises() {
+           const knap = document.querySelector("#knap")
+  
+          
+           knap.addEventListener("click", () => {
+            let partner1 = document.querySelector("#partner1").value
+           let partner2 = document.querySelector("#partner2").value
+            if (isNaN(partner1) || isNaN(partner2)) {
+              console.log("Angiv Tal")
+            } else if (partner1 < 15 || partner2 < 15) {
+              console.log("En eller begge partner skal være over 15")
+            } else {
+
+              partner1AlderUdregn = (partner1/2) + 7
+              partner2AlderUdregn = (partner2/2) + 7
+              
+              if (partner1AlderUdregn > partner2 || partner2AlderUdregn > partner1) {
+                console.log("Reglen over holdes ikke ")
+              } else {
+                console.log("Regelen overholdes")
+              }
+            }
+
+
+           })
+
+        }
+
+
+
+
+        // (aldre / 2) + 7 hvis partner aldre mindre end resultet, stop.
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+

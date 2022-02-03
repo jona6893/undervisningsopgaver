@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="gæt" placeholder="Angiv antal timer" />
+    <input type="submit" value="Start" id="knap" />
+    <input type="submit" value="Prøv igen" id="knap2" />
+    <script>
+       
+          // variabler //
+          window.addEventListener("load", sidenVises());
+          
+          function sidenVises() {
+            console.log("siden")
+            let counterVal = 0;
+            let randomNummer = Math.floor((Math.random() * 20) + 0);
+            sætop()
+        }
+
+        function sætop() {
+          counterVal = 0
+          randomNummer = Math.floor((Math.random() * 20) + 0);
+          console.log("sætop " + randomNummer)
+          const knap = document.querySelector("#knap")
+          const knap2 = document.querySelector("#knap2")
+          knap.addEventListener("click", start);
+          knap2.addEventListener("click", genstart);
+
+        }
+        
+        function genstart() {
+          counterVal = 0
+          console.log(counterVal)
+          console.log("hi") 
+          sidenVises()
+        };
+          function start() { 
+            let gæt = document.querySelector("#gæt").value
+            console.log(gæt)
+            ++counterVal
+            if (isNaN(gæt)) {
+              console.log("Angiv et tal mellem 0 og 20")
+            } else {
+               
+              if (gæt < randomNummer) {
+                console.log("prøv igen tallet er lidt større")
+              } else if (gæt > randomNummer) {
+                console.log("prøv igen taller er lidt mindre")
+              } else if (gæt = randomNummer) {
+                console.log("Tilykke du har gættet tallet, det tog " + counterVal + " gæt for at finde svaret. Prøv igen?")
+              }
+
+            }
+            console.log(counterVal)
+          };
+  
+
+
+
+
+
+   /*      window.addEventListener("load", sidevises());
+
+        function sidevises() {
+        const knap = document.querySelector("#knap")
+        const knap2 = document.querySelector("#knap2")
+
+        knap.addEventListener("click", start);
+        knap2.addEventListener("click", genstart);
+        }
+
+        function start() {
+          console.log("hi")
+        }
+        function genstart() {
+          console.log("hello")
+        } */
+
+    </script>
+  </body>
+</html>
+
+

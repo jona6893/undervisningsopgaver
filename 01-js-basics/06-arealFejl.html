@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06</title>
+  </head>
+  <body>
+     <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="længde" placeholder="Angiv Længde" />
+    <input type="text" id="bredde" placeholder="Angiv Bredde" />
+    <input type="submit" value="Submit" id="knap" />
+    <script>
+        let tal1 = document.querySelector("#længde").value;
+        let tal2 = document.querySelector("#bredde").value;
+        let knap = document.querySelector("#knap");
+        window.addEventListener("load", () => {
+        
+        knap.addEventListener("click", () => {
+        // der er vigtigt at vores .value variabler befinder sig inde i vores event function, ellers ved den ikke hvad værdien af variablen er.
+            let tal1 = document.querySelector("#længde").value;
+            let tal2 = document.querySelector("#bredde").value;
+            /* tal1 og tal2 er parament det indhold en værdi. Den værdi bliver sat ind istedet for længde og bredde i vores funktion.
+              Funktionen ser altså sådan her ud: function areal(tal1, tal2), den kunne også se sådan her ud: function areal(50, 200)*/
+            areal(tal1, tal2)
+        });
+         });
+
+        function areal(længde, bredde) {
+          //isNAN tjekker om parameteren (altså input fra brugen) om det er et tal. Hvis det er et tal, hopper den videre til den næste if/else statement// 
+          if (isNaN(længde) || isNaN(bredde)) {
+            console.log("Der må kun angivses tal")
+          } else {
+             let areal = længde * bredde;
+          console.log(areal)
+          }
+  
+      };
+    </script>
+  </body>
+</html>
+
+

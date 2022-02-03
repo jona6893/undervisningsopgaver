@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <script>
+        window.addEventListener("load", () => {
+          // new Date() henter automatisk dags dato, ved hjælp af .getHours() kan vi se hvor mange time på dagen der er gået//
+          let tid = new Date()
+
+          // Vi kan nu opstile en if/else statement der tjekker hvor timer på dagen der er gået, derefter uddeler den en besked.
+
+          if (tid.getHours() >= 5 && tid.getHours() < 10) {
+            console.log("Godmorgen")
+          } else if (tid.getHours() >= 10 && tid.getHours() < 18) {
+            console.log("Goddag")
+          } else if (tid.getHours() >= 18 && tid.getHours() < 24) {
+            console.log("Godaften")
+          } else if (tid.getHours() >= 24 && tid.getHours() < 5) {
+            console.log("Godnat")
+          }
+
+
+      });
+    </script>
+  </body>
+</html>
+
+

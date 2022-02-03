@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03</title>
+</head>
+<body>
+     <h1>tjek Konsole for resultalt</h1>
+    <label for="name">Hvad er dit navn</label>
+    <input type="text" id="name">
+    <input type="submit" value="Submit" id="knap">
+    <script>
+       
+        window.addEventListener("load", () => {
+            
+        let knap = document.querySelector("#knap")
+            knap.addEventListener("click", () => {
+                let navn = document.querySelector("#name").value
+                console.log("Goddag " + navn)
+            })
+        });
+
+        
+
+    </script>
+</body>
+</html>

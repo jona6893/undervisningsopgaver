@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-visDyr</title>
+</head>
+<body>
+    <article id="dyrlist">
+        <h3></h3>
+        <p></p>
+        <img src="" alt="">
+    </article>
+    <script>
+        document.addEventListener("DOMContentLoaded", () =>{    
+            console.log("DOM Loaded")
+
+    
+            let dyr = {"navn" : "gris", "type" : "pattedyr", "billede" : "http://mabe-kea.dk/E19/pics/pig.png", "levested" : "svinefarme"}
+            console.log(`navn:${dyr.navn}, type:${dyr.type}, billede:${dyr.billede}, levested:${dyr.levested}`)
+
+            const article = document.querySelector("#dyrlist")
+            article.textContent = `navn:${dyr.navn}, type:${dyr.type}, billede:${dyr.billede}, levested:${dyr.levested}`
+
+            
+            
+        })
+    </script>
+</body>
+</html>

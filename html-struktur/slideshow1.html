@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>slideshow</title>
+</head>
+<body>
+    <header>
+        <h1>Title</h1>
+    </header>
+    <main>
+        <h2>Undertitle</h2>
+        <section>
+            <article>
+            <figure>
+                <img src="https://picsum.photos/1000/1000" alt="billede">
+                <figcaption>Article 1</figcaption>
+            </figure>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur beatae animi exercitationem veritatis architecto error minus sunt veniam incidunt? Modi deleniti voluptatum itaque autem doloribus.</p>
+            </article>
+            <article>
+            <figure>
+                <img src="https://picsum.photos/1000/1000" alt="billede">
+                <figcaption>Article 1</figcaption>
+            </figure>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum, dolores maxime magnam consectetur incidunt voluptatum. Excepturi natus cumque atque eveniet praesentium laudantium soluta eligendi amet?</p>
+            </article>
+         </section>
+    </main>
+    <footer>
+        <h4>this is the footer</h4>
+    </footer>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () =>{
+        console.log("DOM loaded")
+ 
+        const h1 = document.querySelector("header h1")
+        const h2 = document.querySelector("main h2")
+        const section = document.querySelector("main section")
+        const article1 = document.querySelector("section:nth-child(1) article")
+        const article2 = document.querySelector("section:nth-child(2) article")
+        const img1 = document.querySelector("article:nth-child(1) img")
+        const img2 = document.querySelector("article:nth-child(2) img")
+        const caption1 = document.querySelector("article:nth-child(1) figcaption")
+        const caption2 = document.querySelector("article:nth-child(2) figcaption")
+        const p1 = document.querySelector("article:nth-child(1) p")
+        const p2 = document.querySelector("article:nth-child(2) p")
+
+
+        caption1.textContent= "HEJ MED DIG"
+        img2.src="https://static.toiimg.com/thumb/54714340.cms?imgsize=458099&width=800&height=800"
+
+        const newArticle = document.createElement("article")
+        const newImage = document.createElement("img")
+        const newh3 = document.createElement("h3")
+        const newP = document.createElement("p")
+        section.appendChild(newArticle)
+        newArticle.appendChild(newImage)
+        newArticle.appendChild(newh3)
+        newArticle.appendChild(newP)
+        newImage.src="https://pbs.twimg.com/profile_images/1307742614381355008/kSlDewoM_400x400.jpg"
+        newh3.textContent="Dette er en overskrift"
+        newP.textContent="MERE SKRIFT"
+        
+        
+        
+        console.log(h1, h2, img1, img2, p1, p2, article1, article2, section) 
+        let number = 0
+        let imgArray = ["https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img1.png?raw=true", 
+            "https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img2.png?raw=true", 
+            "https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img3.png?raw=true", 
+            "https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img4.png?raw=true", 
+            "https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img5.png?raw=true", 
+            "https://github.com/martinbregnhoi/Tema7E20/blob/master/billeder/img6.png?raw=true"]
+            
+
+        img2.addEventListener("click", () => {
+            
+       
+            img2.src= imgArray[number]
+            console.log("Klick")
+            number++     
+       
+        })
+     });
+    </script>
+</body>
+</html>

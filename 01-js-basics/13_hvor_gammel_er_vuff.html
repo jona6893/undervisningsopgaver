@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>13</title>
+  </head>
+  <body>
+    <h1>tjek Konsole for resultalt</h1>
+    <input type="text" id="aldre" placeholder="Hundens aldre" />
+    <input type="submit" value="Tjek" id="knap" />
+    
+    <script>
+       
+          // variabler //
+          window.addEventListener("load", sidenVises());
+          
+          function sidenVises() {
+           const knap = document.querySelector("#knap")
+  
+          
+           knap.addEventListener("click", () => {
+            let aldre = document.querySelector("#aldre").value
+           
+            if (isNaN(aldre)) {
+              console.log("Angiv tal")
+            } else {
+              let gamleUdregning = aldre * 7
+            let nyUdregning = (aldre * Math.log(12)) + 31
+              console.log("Med den gamle udregning er din hund " + gamleUdregning + "år gamle. Med den nye udregning er din hund" + nyUdregning + "år gamle" )
+            }
+
+          });
+        }
+
+
+
+
+        // (aldre / 2) + 7 hvis partner aldre mindre end resultet, stop.
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+

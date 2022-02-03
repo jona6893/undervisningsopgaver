@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02</title>
+</head>
+<body>
+     <h1>tjek Konsole for resultalt</h1>
+    <script>
+        window.addEventListener("load", () => {
+            arealBeregner()
+        });
+        
+        let længde = 100;
+        let bredde = 100;
+
+        let areal = længde + bredde
+    
+
+        function arealBeregner() {
+            if (areal < 100) {
+                console.log("Arealet er for lille")
+            } else if (areal >= 100 && areal < 200) {
+                console.log("Arealet er ok")
+            } else {
+                console.log("Arealet er for stort")
+            }
+        }
+        
+
+    </script>
+</body>
+</html>
