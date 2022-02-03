@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-bilerjson</title>
+</head>
+<body>
+    <section class="data-container"></section>
+    <template class="temp1">
+    <article id="article">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </article>
+    </template>
+    <style>
+        article{
+            border: 1px solid darkgrey;
+            padding: 5%;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () =>{
+
+            const data = "biler.json"
+
+            hentData(data)
+
+            async function hentData(data) {
+                const resultat = await fetch(data)
+                const jsonData = await resultat.json()
+
+                vis(jsonData)
+
+                function vis(jsonData){
+                    const container = document.querySelector(".data-container")
+                    const template = document.querySelector(".temp1")
+
+                    jsonData.forEach(bil => {
+                        let clone = template.cloneNode(true).content
+                        clone.querySelector("p:nth-of-type(1)").textContent = bil.mærke
+                        clone.querySelector("p:nth-of-type(2)").textContent = bil.model
+                        clone.querySelector("p:nth-of-type(3)").textContent = bil.motor
+                        clone.querySelector("p:nth-of-type(4)").textContent = bil.km
+                        clone.querySelector("p:nth-of-type(5)").textContent = bil.udstyr
+
+                        container.appendChild(clone)
+                    })
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

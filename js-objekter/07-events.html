@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>07-events</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="data-container"></section>
     <template>
-    <article id="dyrlist">
+      <article id="dyrlist">
         <h3></h3>
-        <img src="" alt="">
+        <img src="" alt="" />
         <p class="type">Type:</p>
         <p class="levested">levested:</p>
-        <ul id="femDyrListe"> 
-            
-        </ul>
-    </article>
+        <ul id="femDyrListe"></ul>
+      </article>
     </template>
     <section id="section2"></section>
     <template id="temp2">
-        <article>
-            <img class="foto" src="" alt="">
-            <h3></h3>
-            <p></p>
-        </article>
+      <article>
+        <img class="foto" src="" alt="" />
+        <h3></h3>
+        <p></p>
+      </article>
     </template>
     <style>
-        article{
-            border: 1px solid darkgrey;
-            padding: 5%;
-            display: grid;
-            justify-content: center;
-        }
+      article {
+        border: 1px solid darkgrey;
+        padding: 5%;
+        display: grid;
+        justify-content: center;
+      }
 
-        #section2{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 200px));
-            gap: 20px;
-        }
-
+      #section2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 200px));
+        gap: 20px;
+      }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", () =>{
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM Loaded");
 
-            console.log("DOM Loaded")
-
-    
-            let dyr = {"navn" : "gris", "type" : "pattedyr", "billede" : "http://mabe-kea.dk/E19/pics/pig.png", "levested" : "svinefarme"}
-            console.log(`navn:${dyr.navn}, type:${dyr.type}, billede:${dyr.billede}, levested:${dyr.levested}`)
-/* 
+        let dyr = {
+          navn: "gris",
+          type: "pattedyr",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+          levested: "svinefarme",
+        };
+        console.log(
+          `navn:${dyr.navn}, type:${dyr.type}, billede:${dyr.billede}, levested:${dyr.levested}`
+        );
+        /* 
             const p1 = document.querySelector("p:nth-of-type(1)")
             const p2 = document.querySelector("p:nth-of-type(2)")
             const article = document.querySelector("#dyrlist")
@@ -63,28 +65,51 @@
             p2.textContent = `Type: ${dyr.levested}`
  */
 
-            femDyrFunktion()
-            offStream()
-            
-            
-        })
-        //øvelse 06
-        function femDyrFunktion() {
-            let femDyr = [
-                {"navn" : "frø", "type" : "amfibie", "levested" : "sø", "billede" : "http://mabe-kea.dk/E19/pics/frog.png"},
-                {"navn" : "gris", "type" : "pattedyr", "levested" : "svinefarme", "billede" : "http://mabe-kea.dk/E19/pics/pig.png"},
-                {"navn" : "ræv", "type" : "pattedyr", "levested" : "byen", "billede" : "http://mabe-kea.dk/E19/pics/fox.png"},
-                {"navn" : "sild", "type" : "fisk", "levested" : "havet", "billede" : "http://mabe-kea.dk/E19/pics/sild.png"},
-                {"navn" : "krokodille", "type" : "krybdyr", "levested" : "lavland", "billede" : "http://mabe-kea.dk/E19/pics/kroko.jpg"}
-            ]
-            console.log(femDyr[0], femDyr[1], femDyr[2], femDyr[3], femDyr[4])
+        femDyrFunktion();
+        offStream();
+      });
+      //øvelse 06
+      function femDyrFunktion() {
+        let femDyr = [
+          {
+            navn: "frø",
+            type: "amfibie",
+            levested: "sø",
+            billede: "http://mabe-kea.dk/E19/pics/frog.png",
+          },
+          {
+            navn: "gris",
+            type: "pattedyr",
+            levested: "svinefarme",
+            billede: "http://mabe-kea.dk/E19/pics/pig.png",
+          },
+          {
+            navn: "ræv",
+            type: "pattedyr",
+            levested: "byen",
+            billede: "http://mabe-kea.dk/E19/pics/fox.png",
+          },
+          {
+            navn: "sild",
+            type: "fisk",
+            levested: "havet",
+            billede: "http://mabe-kea.dk/E19/pics/sild.png",
+          },
+          {
+            navn: "krokodille",
+            type: "krybdyr",
+            levested: "lavland",
+            billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+          },
+        ];
+        console.log(femDyr[0], femDyr[1], femDyr[2], femDyr[3], femDyr[4]);
 
-            /* const listevisning = document.querySelector("#femDyrListe")
+        /* const listevisning = document.querySelector("#femDyrListe")
             femDyr.forEach(dyr => {
                 listevisning.innerHTML += `<li>${dyr.navn}, ${dyr.type} fra ${dyr.levested}</li>`
             }) */
 
-            /* const container = document.querySelector(".data-container")
+        /* const container = document.querySelector(".data-container")
             const underviserTemplate = document.querySelector("template")
             femDyr.forEach(dyr => {
                 let klon = underviserTemplate.cloneNode(true).content
@@ -95,28 +120,53 @@
                 container.appendChild(klon)
             })
                 console.log("made it so far") */
-        }
-        //øvelse 07
-        function offStream() {
-            let videoer = [
-                {"billede" : "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg", "title" : "A Calling", "info" : "Christian Bengtson | Danmark | 20 min  | 2019"},  
-                {"billede" : "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg", "title" : "A Hole In My Heart", "info" : "Mees Peijnenburg | Holland | 9 min  | 2015"},  
-                {"billede" : "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg", "title" : "A Place In The Sun - 110 years after the genocide", "info" : "Christian Zipfel | Tyskland | 20 min  | 2018"},  
-                {"billede" : "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg", "title" : "A Tower of Two", "info" : "Jacob Krzysztof Glogowski | Danmark | 21 min  | 2019"},  
-                {"billede" : "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/HRZBn8KLPmvVNvoJ4e8CzUVU-360.jpg", "title" : "A Woman Without Children", "info" : "Cecilie Kronborg Thomsen | Danmark | 20 min  | 2021"}  
-            ] 
+      }
+      //øvelse 07
+      function offStream() {
+        let videoer = [
+          {
+            billede:
+              "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg",
+            title: "A Calling",
+            info: "Christian Bengtson | Danmark | 20 min  | 2019",
+          },
+          {
+            billede:
+              "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg",
+            title: "A Hole In My Heart",
+            info: "Mees Peijnenburg | Holland | 9 min  | 2015",
+          },
+          {
+            billede:
+              "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg",
+            title: "A Place In The Sun - 110 years after the genocide",
+            info: "Christian Zipfel | Tyskland | 20 min  | 2018",
+          },
+          {
+            billede:
+              "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg",
+            title: "A Tower of Two",
+            info: "Jacob Krzysztof Glogowski | Danmark | 21 min  | 2019",
+          },
+          {
+            billede:
+              "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/HRZBn8KLPmvVNvoJ4e8CzUVU-360.jpg",
+            title: "A Woman Without Children",
+            info: "Cecilie Kronborg Thomsen | Danmark | 20 min  | 2021",
+          },
+        ];
 
-            const section2 = document.querySelector("#section2")
-            const temp2 = document.querySelector("#temp2")
+        const section2 = document.querySelector("#section2");
+        const temp2 = document.querySelector("#temp2");
 
-            videoer.forEach(video => {
-                let clone = temp2.cloneNode(true).content
-                clone.querySelector("img").src = video.billede;
-                clone.querySelector("h3").textContent = video.title
-                clone.querySelector("p").textContent = video.info
-                section2.appendChild(clone)
-            })
-            /* const container = document.querySelector("#section2")
+        videoer.forEach((video) => {
+          let clone = temp2.cloneNode(true).content;
+          clone.querySelector("img").src = video.billede;
+          clone.querySelector("h3").textContent = video.title;
+          clone.querySelector("p").textContent = video.info;
+          section2.appendChild(clone);
+        });
+        /* const container = document.querySelector("#section2")
             const underviserTemplate = document.querySelector("#temp2")
             videoer.forEach(video => {
                 let klon = underviserTemplate.cloneNode(true).content
@@ -125,8 +175,7 @@
                 klon.querySelector("p").textContent = video.info
                 container.appendChild(klon)
             }) */
-        }
-
+      }
     </script>
-</body>
+  </body>
 </html>

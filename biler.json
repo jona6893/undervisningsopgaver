@@ -1,0 +1,23 @@
+[
+    {
+        "mærke": "Vovlo",
+        "model": "Amazon",
+        "motor": "Bezin",
+        "km": "50000",
+        "udstyr": ["Blinklys", " carplay", " Parkerings sensor"]
+    },
+    {
+      "mærke": "Tesla",
+      "model": "Model s",
+      "motor": "El",
+      "km": "345609",
+      "udstyr": ["Autopilot", " Drawing App", " 360 Camera view"]
+    },
+    {
+      "mærke": "BMW",
+      "model": "M3",
+      "motor": "Disel",
+      "km": "8745323",
+      "udstyr": ["Launch Control", " GPS", " B&O Højtaler"]
+    }
+]
