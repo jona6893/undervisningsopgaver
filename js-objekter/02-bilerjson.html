@@ -30,6 +30,10 @@
 
             hentData(data)
 
+            /* Det samme som det forneden bare i en awrro funktion.
+             const fetchAsyncA = async () => 
+	        await (await fetch('https://api.github.com')).json() */
+
             async function hentData(data) {
                 const resultat = await fetch(data)
                 const jsonData = await resultat.json()

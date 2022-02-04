@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>persongalleri_eget_database</title>
+    <style>
+        section{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+
+        }
+        article{
+            border: 1px solid black;
+            display: grid;
+            justify-content: center;
+        }
+        li{
+          width:250px;
+           word-wrap: break-word;
+        }
+    </style>
+  </head>
+  <body>
+    <section id="section1"></section>
+    <template id="temp1">
+      <article id="article">
+          <h2></h2>
+          <ul>
+              <li class="li1"></li>
+              <li class="li2"></li>
+          </ul>
+      </article>
+    </template>
+
+    <script>
+      // Json link
+      const url = "https://personliste-a20f.restdb.io/rest/medlem";
+
+      // Api key
+      const options = {
+        headers: {
+          'x-apikey': "61fcf7e43f215f310a37be52",
+        },
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("dom loaded");
+
+        hentData();
+      });
+
+      async function hentData() {
+        console.log("test");
+        const resultat = await fetch(url, options);
+        const json = await resultat.json();
+        vis(json);
+      }
+      function vis(json) {
+        console.log(json);
+
+        const container = document.querySelector("#section1")
+        const template = document.querySelector("#temp1")
+
+        json.forEach(person => {
+            let clone = template.cloneNode(true).content
+            clone.querySelector("h2:nth-of-type(1)").textContent = person.fornavn + " " + person.efternavn             
+            clone.querySelector(".li1").textContent = person.email
+            clone.querySelector(".li2").textContent = person.profilebillede
+            container.appendChild(clone)           
+        });
+      }
+
+
+    </script>
+  </body>
+</html>
+
+<!-- billede: "COLOURBOX7112442.jpg"
+efternavn: "Walsh"
+email: "jane@mail.com"
+fornavn: "Jane"
+fødselsdag: "2011-06-07T00:00:00.000Z"
+hobby: "cumque atque aperiam ad quos tempore odio"
+titel: "Et adipisci"
+troende: "tvivler"
+_id: "60116c1eef2e8a1b00036d3a"
+_mock: true -->
