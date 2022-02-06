@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babuska</title>
+    <style>
+        
+        img{width: 100%; border-radius: 20px;}
+        header{
+            width: 100%;
+            height: 250px;
+            background-image: url(babushka_fotos/banner.png);
+            background-size: cover;
+            background-position: 0%;
+        }
+        main{
+            padding: 2% 0% 2% 0%;
+            display: grid;
+            justify-content: center;
+        }
+        #container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            width: 80vw;
+        }
+        
+        .article{
+            border: 5px solid lightpink;
+            border-radius: 20px;
+            background-color:lightblue;
+            padding: 5%;
+            transition: 0.2s;
+        }
+        .article:nth-child(odd) {
+            border: 5px solid lightblue;
+            background-color: lightpink;
+        }
+        .article:hover{
+            transform: scale(1.05);
+            z-index: 2;
+            cursor: pointer;
+        }
+        .popup{
+            z-index: 3;
+            position:fixed;
+            top: 0%;
+            left: 0%;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(50, 205, 50, 0.329);
+            display: none;
+        }
+        .display{
+            display: block;
+        }
+        .position{
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .style{
+            display: grid;
+            gap: 10px;
+            grid-template-rows: 300px 1fr 0.5fr;
+            justify-content: center;
+            align-items: center;
+            width: 600px;
+            height: 500px;
+            background-color: white;
+            padding: 5%;
+            word-wrap: break-word;
+           
+        }
+        .img2{
+            display: block;
+            height: 300px;
+        }
+        .imgdiv{
+            height: 300px;
+            object-fit: cover;
+        }
+        .text{
+            display: grid;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <section id="container"></section>
+        <template class="temp1">
+            <section class="popup">
+                <div class="position">
+                    <div class="style">
+                        <figure class="imgdiv">
+                        <img class="img2" src="" alt="">
+                        </figure>
+                        <div class="text">
+                            <h2 class="titel2"></h2>
+                            <p class="short_description2"></p>
+                            <p class="long_description"></p>
+                            <p class="place"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <article class="article">
+             
+            <img class="img1" src="" alt="">
+            <h2 class="titel"></h2>
+            <p class="short_description"></p>
+            <h4 class="pris"></h4>
+        </article>
+        </template>
+    </main>
+
+
+
+    <script>
+        //Database link og kode
+        const url = "https://babushka-dd8a.restdb.io/rest/menu"
+        const options = {
+            headers: {
+                "x-apikey": "600ec2fb1346a1524ff12de4",
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => { 
+
+            console.log("dlfij")
+            hentData()
+        })
+        // henter information fra url og bruger options som adgangskode
+        async function hentData() {
+            console.log("hi")
+            const responds = await fetch(url, options)
+            const json = await responds.json()
+            vis(json)
+        }
+
+        function vis(json) {
+            console.log(json)
+            
+
+
+        const container = document.querySelector("#container")
+        const temp1 = document.querySelector(".temp1")
+
+        json.forEach(ret => {
+            const clone = temp1.cloneNode(true).content
+            clone.querySelector(".img1").src = "babushka_fotos/" + ret.billednavn + "-md.jpg"
+            clone.querySelector(".img2").src = "babushka_fotos/" + ret.billednavn + "-md.jpg"
+            clone.querySelector(".titel").textContent = ret.navn
+            clone.querySelector(".titel2").textContent = ret.navn
+            clone.querySelector(".short_description").textContent = ret.kortbeskrivelse
+            clone.querySelector(".short_description2").textContent = ret.kortbeskrivelse
+            clone.querySelector(".long_description").textContent = ret.langbeskrivelse
+            clone.querySelector(".place").textContent = ret.oprindelsesregion
+            clone.querySelector(".pris").textContent = ret.pris
+            container.appendChild(clone)
+    
+        })
+        // vælger alle de valgte klasserne i DOM og lave en variable
+        const popup = document.querySelectorAll(".popup")
+        const articles = document.querySelectorAll(".article")
+
+        // Laver en Liste ud fra de varibler, med de valgte klasser
+        let artArray = Array.from(articles)
+        let popArray = Array.from(popup)
+
+        // laver en funktion for hver element i listen.
+        artArray.forEach(articleClick)
+        popArray.forEach(popClick)
+ 
+        // Funktion med en event listener. funktion tager "element" og "index" som parameter. "element" er et punkt fra listen. 
+        // "index" er det punkts nummer i listen, altså hvis der er 10 punkter og det 3 punkter er valgt så er index = 3. 
+        function articleClick(element, index) {
+            element.addEventListener("click", () => {
+                console.log(element + index)
+            // toggler klassen display på listen popArray, men kun på det punkt listen som har samme nummer som artArray. Det er det [index] gøt.
+                popArray[index].classList.toggle("display")
+            })
+        }
+        // gør det sammen som foroven men omvendt.
+        function popClick(pop, index) {
+            pop.addEventListener("click", () => {
+                console.log(pop + index)
+                pop.classList.remove("display")
+        }) 
+        }
+
+
+        }
+    
+
+    </script>
+</body>
+</html>
+
+<!-- 
+billede: ['600ec0daef2e8a1b00024661']
+billednavn: "voda"
+kategori: "drikkevarer"
+kortbeskrivelse: "Voda-vodka - vodka i rigelige mængder"
+langbeskrivelse: "Voda-vodka - en vodka brygget på det pureste vand af smeltet sne fra Sibirien. Passer godt til alle hovedretter"
+navn: "Voda-vodka"
+oprindelsesregion: "Sibirien"
+pris 
+-->
