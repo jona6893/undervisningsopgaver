@@ -43,7 +43,7 @@
             left: 0%;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(50, 205, 50, 0.329);
+            background-color: rgba(50, 205, 50, 0);
             display: none;
         }
         .display{

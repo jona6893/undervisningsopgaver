@@ -1,125 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Babuska</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-
-    </header>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
     <main>
-        <section id="container"></section>
-        <template class="temp1">
-            <section class="popup">
-                <div class="position">
-                    <div class="style">
-                        <figure class="imgdiv">
-                        <img class="img2" src="" alt="">
-                        </figure>
-                        <div class="text">
-                            <h2 class="titel2"></h2>
-                            <p class="short_description2"></p>
-                            <p class="long_description"></p>
-                            <p class="place"></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="buttons" onload="getButtons()">
+        <button onclick="renderMenu('hovedretter')">hovedretter</button>
+        <button onclick="renderMenu('drikkevarer')">oerij</button>
+        <button>kicl</button>
+        </section>
+      <section id="container">
+          
+      </section>
+      <template class="temp1">
+        <section class="popup">
+          <div class="position">
+            <div class="style">
+              <figure class="imgdiv">
+                <img class="img2" src="" alt="" />
+              </figure>
+              <div class="text">
+                <h2 class="titel2"></h2>
+                <p class="short_description2"></p>
+                <p class="long_description"></p>
+                <p class="place"></p>
+              </div>
+            </div>
+          </div>
+        </section>
         <article class="article">
-             
-            <img class="img1" src="" alt="">
-            <h2 class="titel"></h2>
-            <p class="short_description"></p>
-            <h4 class="pris"></h4>
+          <img class="img1" src="" alt="" />
+          <h2 class="titel"></h2>
+          <p class="short_description"></p>
+          <h4 class="pris"></h4>
         </article>
-        </template>
+      </template>
     </main>
 
-
-
     <script>
-        //Database link og kode
-        const url = "https://babushka-dd8a.restdb.io/rest/menu"
-        const options = {
-            headers: {
-                "x-apikey": "600ec2fb1346a1524ff12de4",
-            }
-        }
+      //Database link og kode
+      const url = "https://babushka-dd8a.restdb.io/rest/menu";
+      const options = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
+      window.onload=renderMenu("navn")
 
-        document.addEventListener("DOMContentLoaded", () => { 
+/*       document.addEventListener("DOMContentLoaded", () => {
+        console.log("dom load");
+        hentData();
+      }); */
+      // henter information fra url og bruger options som adgangskode
+      async function hentData() {
+        console.log("hi");
+        const responds = await fetch(url, options);
+        const json = await responds.json();
+        return json;
+      }
 
-            console.log("dlfij")
-            hentData()
-        })
-        // henter information fra url og bruger options som adgangskode
-        async function hentData() {
-            console.log("hi")
-            const responds = await fetch(url, options)
-            const json = await responds.json()
-            vis(json)
-        }
+/*     async function getButtons() {
+          const json = await hentData();
+          let buttonOptions = [];
+          json.forEach(i => {
+              if (buttonOptions.indexOf(i.kategori) == -1) {
+                    buttonOptions.push(i.kategori);
+              }
+          });
 
-        function vis(json) {
-            console.log(json)
-            
+          } */
 
+     async function renderMenu(category) {
+            console.log("rendermenu")
+            const json = await hentData();
+            const container = document.querySelector("#container");
+            const temp1 = document.querySelector(".temp1");
+             container.innerHTML = '';
 
-        const container = document.querySelector("#container")
-        const temp1 = document.querySelector(".temp1")
-
-        json.forEach(ret => {
-            const clone = temp1.cloneNode(true).content
-            clone.querySelector(".img1").src = "babushka_fotos/" + ret.billednavn + "-md.jpg"
-            clone.querySelector(".img2").src = "babushka_fotos/" + ret.billednavn + "-md.jpg"
-            clone.querySelector(".titel").textContent = ret.navn
-            clone.querySelector(".titel2").textContent = ret.navn
-            clone.querySelector(".short_description").textContent = ret.kortbeskrivelse
-            clone.querySelector(".short_description2").textContent = ret.kortbeskrivelse
-            clone.querySelector(".long_description").textContent = ret.langbeskrivelse
-            clone.querySelector(".place").textContent = ret.oprindelsesregion
-            clone.querySelector(".pris").textContent = ret.pris
-            container.appendChild(clone)
-    
-        })
-        // vælger alle de valgte klasserne i DOM og lave en variable
-        const popup = document.querySelectorAll(".popup")
-        const articles = document.querySelectorAll(".article")
-
-        // Laver en Liste ud fra de varibler, med de valgte klasser
-        let artArray = Array.from(articles)
-        let popArray = Array.from(popup)
-
-        // laver en funktion for hver element i listen.
-        artArray.forEach(articleClick)
-        popArray.forEach(popClick)
- 
-        // Funktion med en event listener. funktion tager "element" og "index" som parameter. "element" er et punkt fra listen. 
-        // "index" er det punkts nummer i listen, altså hvis der er 10 punkter og det 3 punkter er valgt så er index = 3. 
-        function articleClick(element, index) {
+            json.filter(e => category == "navn" || e.kategori == category).forEach((ret) => {
+                console.log("filter")
+                const clone = temp1.cloneNode(true).content;
+                clone.querySelector(".img1").src =
+                    "babushka_fotos/" + ret.billednavn + "-md.jpg";
+                clone.querySelector(".img2").src =
+                    "babushka_fotos/" + ret.billednavn + "-md.jpg";
+                clone.querySelector(".titel").textContent = ret.navn;
+                clone.querySelector(".titel2").textContent = ret.navn;
+                clone.querySelector(".short_description").textContent =
+                    ret.kortbeskrivelse;
+                clone.querySelector(".short_description2").textContent =
+                    ret.kortbeskrivelse;
+                clone.querySelector(".long_description").textContent =
+                    ret.langbeskrivelse;
+                clone.querySelector(".place").textContent = ret.oprindelsesregion;
+                clone.querySelector(".pris").textContent = ret.pris;
+                container.appendChild(clone);
+            });
+             // vælger alle de valgte klasserne i DOM og lave en variable
+            const popup = document.querySelectorAll(".popup");
+            const articles = document.querySelectorAll(".article");
+            // Laver en Liste ud fra de varibler, med de valgte klasser
+            let artArray = Array.from(articles);
+            let popArray = Array.from(popup);
+            // laver en funktion for hver element i listen.
+            artArray.forEach(articleClick);
+            popArray.forEach(popClick);
+            // Funktion med en event listener. funktion tager "element" og "index" som parameter. "element" er et punkt fra listen.
+            // "index" er det punkts nummer i listen, altså hvis der er 10 punkter og det 3 punkter er valgt så er index = 3.
+            function articleClick(element, index) {
             element.addEventListener("click", () => {
-                console.log(element + index)
+            console.log(element + index);
             // toggler klassen display på listen popArray, men kun på det punkt listen som har samme nummer som artArray. Det er det [index] gøt.
-                popArray[index].classList.toggle("display")
-            })
+            popArray[index].classList.toggle("display");
+          });
         }
         // gør det sammen som foroven men omvendt.
         function popClick(pop, index) {
-            pop.addEventListener("click", () => {
-                console.log(pop + index)
-                pop.classList.remove("display")
-        }) 
+          pop.addEventListener("click", () => {
+            console.log(pop + index);
+            pop.classList.remove("display");
+          });
         }
+            
+      }
+/* 
+      function vis(json) {
+        console.log(json);
 
+        const container = document.querySelector("#container");
+        const temp1 = document.querySelector(".temp1");
 
+        json.forEach((ret) => {
+          const clone = temp1.cloneNode(true).content;
+          clone.querySelector(".img1").src =
+            "babushka_fotos/" + ret.billednavn + "-md.jpg";
+          clone.querySelector(".img2").src =
+            "babushka_fotos/" + ret.billednavn + "-md.jpg";
+          clone.querySelector(".titel").textContent = ret.navn;
+          clone.querySelector(".titel2").textContent = ret.navn;
+          clone.querySelector(".short_description").textContent =
+            ret.kortbeskrivelse;
+          clone.querySelector(".short_description2").textContent =
+            ret.kortbeskrivelse;
+          clone.querySelector(".long_description").textContent =
+            ret.langbeskrivelse;
+          clone.querySelector(".place").textContent = ret.oprindelsesregion;
+          clone.querySelector(".pris").textContent = ret.pris;
+          container.appendChild(clone);
+        });
+
+        // .filter() .map() & forEach()
+        json.filter((i) => i.katagori == "drikkevare").forEach((varer) => {});
+
+        // vælger alle de valgte klasserne i DOM og lave en variable
+        const popup = document.querySelectorAll(".popup");
+        const articles = document.querySelectorAll(".article");
+
+        // Laver en Liste ud fra de varibler, med de valgte klasser
+        let artArray = Array.from(articles);
+        let popArray = Array.from(popup);
+
+        // laver en funktion for hver element i listen.
+        artArray.forEach(articleClick);
+        popArray.forEach(popClick);
+
+        // Funktion med en event listener. funktion tager "element" og "index" som parameter. "element" er et punkt fra listen.
+        // "index" er det punkts nummer i listen, altså hvis der er 10 punkter og det 3 punkter er valgt så er index = 3.
+        function articleClick(element, index) {
+          element.addEventListener("click", () => {
+            console.log(element + index);
+            // toggler klassen display på listen popArray, men kun på det punkt listen som har samme nummer som artArray. Det er det [index] gøt.
+            popArray[index].classList.toggle("display");
+          });
         }
-    
-
+        // gør det sammen som foroven men omvendt.
+        function popClick(pop, index) {
+          pop.addEventListener("click", () => {
+            console.log(pop + index);
+            pop.classList.remove("display");
+          });
+        }
+      } */
     </script>
-</body>
+  </body>
 </html>
 
 <!-- 
