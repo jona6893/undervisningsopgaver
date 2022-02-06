@@ -11,9 +11,13 @@
     <header></header>
     <main>
         <section id="buttons" onload="getButtons()">
-        <button onclick="renderMenu('hovedretter')">hovedretter</button>
-        <button onclick="renderMenu('drikkevarer')">oerij</button>
-        <button>kicl</button>
+        <!-- når der klikkes stater funktion med parameter -->
+        <button onclick="renderMenu('navn')">Vis Alle</button>
+        <button onclick="renderMenu('hovedretter')">Hovedretter</button>
+        <button onclick="renderMenu('forretter')">Forretter</button>
+        <button onclick="renderMenu('sideorders')">Sideorders</button>
+        <button onclick="renderMenu('drikkevarer')">Drikkevarer</button>
+        <button onclick="renderMenu('desserter')">Desserter</button>
         </section>
       <section id="container">
           
@@ -51,6 +55,7 @@
           "x-apikey": "600ec2fb1346a1524ff12de4",
         },
       };
+      //når siden loades starer funktionen renderMenu med ("navn") som parameter
       window.onload=renderMenu("navn")
 
 /*       document.addEventListener("DOMContentLoaded", () => {
@@ -62,6 +67,7 @@
         console.log("hi");
         const responds = await fetch(url, options);
         const json = await responds.json();
+        console.log(json)
         return json;
       }
 
@@ -78,13 +84,15 @@
 
      async function renderMenu(category) {
             console.log("rendermenu")
+            //henter json file fra hentData(
             const json = await hentData();
             const container = document.querySelector("#container");
             const temp1 = document.querySelector(".temp1");
-             container.innerHTML = '';
-
+            // tømmer container for alt infomation
+            container.innerHTML = '';
+            // hvis objektet i json filen har "navn" eller en kategori der er = parameteren så tildels følgene infomationer til containeren.
+            // e = parameter, parameter = renderMenu(skrive paramenter). "navn" bruges til at vise alle objekter da de alle har navn tilfælles
             json.filter(e => category == "navn" || e.kategori == category).forEach((ret) => {
-                console.log("filter")
                 const clone = temp1.cloneNode(true).content;
                 clone.querySelector(".img1").src =
                     "babushka_fotos/" + ret.billednavn + "-md.jpg";
