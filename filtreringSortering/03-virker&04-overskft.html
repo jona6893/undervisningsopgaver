@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03-virker&04-overskift</title>
+    <style>
+      main {
+        background-color: #d3d0cb;
+      }
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      article {
+        border: 1px solid black;
+        border-radius: 15px;
+        background-color: #e2c044;
+        padding: 2%;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>overskrift</h1>
+    <nav>
+      <!-- data- kan vi hente a js med en eventlistner. troende="" ændre objektets troende værdi til det vi skrive: " " -->
+      <button data-troende="alle" class="valgt">Alle</button>
+      <button data-troende="ja">Troende</button>
+      <button data-troende="nej">Ikke Troende</button>
+      <button data-troende="tvivler">Tvivler</button>
+    </nav>
+    <section id="section1"></section>
+    <template id="temp1">
+      <article id="article">
+        <h2></h2>
+        <img src="" alt="" />
+        <ul>
+          <li class="li1"></li>
+          <li class="li2"></li>
+          <li class="li3"></li>
+          <li class="li4"></li>
+          <li class="li5"></li>
+        </ul>
+      </article>
+    </template>
+
+    <script>
+      // Json link
+      const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri ";
+
+      // Api key
+      const options = {
+        headers: {
+          "x-apikey": "600fe9211346a1524ff12e31",
+        },
+      };
+      const h1 = document.querySelector("h1");   
+      // global variable, let personer uden værdi som vi senere ændre.  
+      let personer;
+      //global variable, sat til "alle" hvilket vil vises alle objekterne i vores array(json file)
+      let filter = "alle";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("dom loaded");
+        start()
+      });
+      // start funktion med en eventlistner der lytter til når vi klikker på en af knapperne.
+      function start() {
+        // vælger alle knapper i nav i html filen
+        const filterKnapper = document.querySelectorAll("nav button");
+        // placer eventlistener på hver knap i variablen filterKnapper, start derefter funktionen filterPersoner
+        filterKnapper.forEach(knap => knap.addEventListener("click", filterPersoner))
+        hentData();
+        }
+
+      function filterPersoner() {
+        console.log("filterknapper")
+        //filter bliver nu til det der står i vores knap, ved at hente infomationerne i data-troende="" ved brug af dataset.troende
+        filter = this.dataset.troende
+        vis()
+        //ændre teksten af h1 til det som knappen hedder.
+        h1.textContent = this.textContent
+      }
+
+      async function hentData() {
+        console.log("test");
+        const resultat = await fetch(url, options);
+        //let personer, som var tom bliver nu fyldt ud med vores json array.
+        personer = await resultat.json();
+        vis();
+      }
+      function vis() {
+        console.log(personer);
+
+        const container = document.querySelector("#section1");
+        const template = document.querySelector("#temp1");
+        // sletter alt i voers container(section) så vi kun får det filterede indhold på siden.
+        container.textContent = ""
+        
+        personer.forEach((person) => {
+          console.log("hi")
+          /* en if else funktion der skal opfylde 2 krav. 1 - variablen filter skal være ligmed vores indhold i json filen.
+          2 - filter skal være lig med "alle" hvis den er det så bliver der ikke filterede noget da ingen af objekterne i json filen indholder "alle" */
+          if (filter == person.troende || filter == "alle") {
+            let clone = template.cloneNode(true).content;
+            clone.querySelector("h2:nth-of-type(1)").textContent =
+              person.fornavn + " " + person.efternavn;
+            clone.querySelector("img").src =
+              "../persongalleri/faces/" + person.billede;
+            clone.querySelector(".li1").textContent = person.email;
+            clone.querySelector(".li2").textContent = person.fødselsdag;
+            clone.querySelector(".li3").textContent = person.hobby;
+            clone.querySelector(".li4").textContent = person.titel;
+            clone.querySelector(".li5").textContent = person.troende;
+            container.appendChild(clone);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- billede: "COLOURBOX7112442.jpg"
+efternavn: "Walsh"
+email: "jane@mail.com"
+fornavn: "Jane"
+fødselsdag: "2011-06-07T00:00:00.000Z"
+hobby: "cumque atque aperiam ad quos tempore odio"
+titel: "Et adipisci"
+troende: "tvivler"
+_id: "60116c1eef2e8a1b00036d3a"
+_mock: true -->
