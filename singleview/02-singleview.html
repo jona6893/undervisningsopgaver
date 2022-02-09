@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02-singleview</title>
+    <style>
+      main {
+        background-color: #d3d0cb;
+      }
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      article {
+        border: 1px solid black;
+        border-radius: 15px;
+        background-color: #e2c044;
+        padding: 2%;
+      }
+      img {
+        width: 100%;
+      }
+      .valgt {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>02-singleview</h1>
+    <button>tilbage</button>
+    <article id="article">
+      <h2></h2>
+      <img src="" alt="" />
+      <h3></h3>
+      <p></p>
+    </article>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      let person;
+
+      console.log({ id });
+
+      // Json link
+      const url = `https://persongalleri-5d3e.restdb.io/rest/persongalleri/${id} `;
+
+      // Api key
+      const options = {
+        headers: {
+          "x-apikey": "600fe9211346a1524ff12e31",
+        },
+      };
+      hentData()
+
+      async function hentData() {
+        console.log("test");
+        const resultat = await fetch(url, options);
+        //let personer, som var tom bliver nu fyldt ud med vores json array.
+        person = await resultat.json();
+        console.log(person);
+        vis()
+      }
+
+      function vis() {
+        document.querySelector("h2").textContent= person.fornavn + " " + person.efternavn
+        document.querySelector("img").src= "../persongalleri/faces/" + person.billede
+        document.querySelector("h3").textContent= person.hobby
+
+      }
+      document.querySelector("button").addEventListener("click", () =>{
+        history.back()
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- billede: "COLOURBOX7112442.jpg"
+efternavn: "Walsh"
+email: "jane@mail.com"
+fornavn: "Jane"
+fødselsdag: "2011-06-07T00:00:00.000Z"
+hobby: "cumque atque aperiam ad quos tempore odio"
+titel: "Et adipisci"
+troende: "tvivler"
+_id: "60116c1eef2e8a1b00036d3a"
+_mock: true -->
